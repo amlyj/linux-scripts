@@ -56,4 +56,5 @@ function logInfo() {
     echo -e "\033[0;36;1m $time - [$user] [INFO] $*  \033[0m"
 }
 
+
 logInfo helloworld!
