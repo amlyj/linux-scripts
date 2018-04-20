@@ -1,3 +1,3 @@
 #! /bin/bash
 
-notify-send ["alert"] "hello world!"
+dialog --title "test" --msgbox "hello world!" 10 20
