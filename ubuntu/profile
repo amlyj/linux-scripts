@@ -1,0 +1,44 @@
+# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
+# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
+
+if [ "$PS1" ]; then
+  if [ "$BASH" ] && [ "$BASH" != "/bin/sh" ]; then
+    # The file bash.bashrc already sets the default PS1.
+    # PS1='\h:\w\$ '
+    if [ -f /etc/bash.bashrc ]; then
+      . /etc/bash.bashrc
+    fi
+  else
+    if [ "`id -u`" -eq 0 ]; then
+      PS1='# '
+    else
+      PS1='$ '
+    fi
+  fi
+fi
+
+# The default umask is now handled by pam_umask.
+# See pam_umask(8) and /etc/login.defs.
+
+if [ -d /etc/profile.d ]; then
+  for i in /etc/profile.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+  unset i
+fi
+
+
+export M2_HOME=/usr/local/maven
+export JAVA_HOME=/usr/local/jdk8
+export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/goWorkSpace
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin:$GOBIN
+export NODE_HOME=/usr/local/node-v6.10.2
+export PATH=$NODE_HOME/bin:$PATH
+export HADOOP_HOME=/usr/local/hadoop-1.2.1
+export PATH=$HADOOP_HOME/bin:$PATH
